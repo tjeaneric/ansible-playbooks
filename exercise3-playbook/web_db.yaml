@@ -21,12 +21,12 @@
   hosts: dbsrvgrp
   become: yes
   tasks:
-    - name: Install MySQL server
+    - name: Install Postgresql server
       apt:
-        name: mariadb-server
+        name: postgresql
         state: present
-    - name: Start and Enable mariadb service
+    - name: Start and Enable postgresql service
       service:
-        name: mariadb
+        name: postgresql
         state: started
         enabled: yes
