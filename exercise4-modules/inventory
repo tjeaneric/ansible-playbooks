@@ -1,0 +1,23 @@
+web01 ansible_host=172.31.19.151 
+web02 ansible_host=172.31.21.165 
+db01 ansible_host=172.31.16.145
+
+#Group
+[websrvgrp]
+web01
+web02
+
+#Group
+[dbsrvgrp]
+db01
+
+#Group of groups
+[dc_ohio:children]
+websrvgrp
+dbsrvgrp
+
+#Group level variables, host level takes precedence
+[dc_ohio:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=~/aws-hosts-key.pem
+

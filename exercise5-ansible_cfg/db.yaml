@@ -1,0 +1,27 @@
+---
+
+- name: Setup DBServer
+  hosts: dbsrvgrp
+  become: yes
+  tasks:
+    - name: Install Postgresql server and acl
+      apt:
+        name:
+          - postgresql
+          - acl
+        state: present
+    - name: Install Python psycopg2
+      apt:
+        name: python3-psycopg2
+        state: present
+    - name: Start and Enable postgresql service
+      service:
+        name: postgresql
+        state: started
+        enabled: yes
+    - name: Create a new database with name "accounts"
+      become: true
+      become_user: postgres
+      postgresql_db:
+        name: accounts
+    
